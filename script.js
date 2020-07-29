@@ -18,6 +18,22 @@ function startGame() {
             imgData.data[i + 3] = 255;
       }
 
+      y = Math.floor(Math.random() * c.width);
+      x = Math.floor(Math.random() * c.height);
+      size = 5;
+      thickness = 5;
+
+      var color = false;
+
+      for (i = 0; i < size; i++) {
+            for (j = 0; j < thickness * 4; j += 4) {
+                  imgData.data[(i + x) * c.width * 4 + j + y * 4] = 255;
+                  imgData.data[(i + x) * c.width * 4 + j + y * 4 + 1] = color ? 0 : 255;
+                  imgData.data[(i + x) * c.width * 4 + j + y * 4 + 2] = color ? 0 : 255;
+                  color = !color;
+            }
+      }
+
 
       var squareSize = 100;
 
