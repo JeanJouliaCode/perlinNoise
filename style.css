@@ -1,0 +1,14 @@
+.canvas{
+      border:1px solid #d3d3d3;
+}
+
+html {
+      margin: 0px;
+      height: 100%;
+   }
+   
+body {
+      margin: 0px;
+      min-height: 100%;
+      background-color: #10222C;
+}
