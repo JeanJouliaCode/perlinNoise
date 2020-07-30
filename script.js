@@ -18,18 +18,18 @@ function startGame() {
             imgData.data[i + 3] = 255;
       }
 
-      y = Math.floor(Math.random() * c.width);
-      x = Math.floor(Math.random() * c.height);
-      size = 5;
-      thickness = 5;
+      ycharlie = Math.floor(Math.random() * c.width);
+      xcharlie = Math.floor(Math.random() * c.height);
+      size = 4;
+      thickness = 4;
 
       var color = false;
 
       for (i = 0; i < size; i++) {
             for (j = 0; j < thickness * 4; j += 4) {
-                  imgData.data[(i + x) * c.width * 4 + j + y * 4] = 255;
-                  imgData.data[(i + x) * c.width * 4 + j + y * 4 + 1] = color ? 0 : 255;
-                  imgData.data[(i + x) * c.width * 4 + j + y * 4 + 2] = color ? 0 : 255;
+                  imgData.data[(i + xcharlie) * c.width * 4 + j + ycharlie * 4] = 255;
+                  imgData.data[(i + xcharlie) * c.width * 4 + j + ycharlie * 4 + 1] = color ? 0 : 255;
+                  imgData.data[(i + xcharlie) * c.width * 4 + j + ycharlie * 4 + 2] = color ? 0 : 255;
                   color = !color;
             }
       }
@@ -42,14 +42,12 @@ function startGame() {
 
       pad.addEventListener('mousemove', (event) => {
             if (clicked) {
-                  var y = event.clientX - squareSize / 2;
-                  var x = event.clientY - squareSize / 2;
+                  var y = ycharlie + 3;
+                  var x = xcharlie + 3;
 
                   for (i = 0; i < squareSize; i++) {
                         for (j = 0; j < squareSize * 4; j += 4) {
-                              imgData.data[(i + x) * c.width * 4 + j + y * 4] = Math.floor(Math.random() * 255);
-                              imgData.data[(i + x) * c.width * 4 + j + y * 4 + 1] = Math.floor(Math.random() * 255);
-                              imgData.data[(i + x) * c.width * 4 + j + y * 4 + 2] = 1;
+                              imgData.data[(i + x) * c.width * 4 + j + y * 4 + 3] = 100;
                         }
                   }
                   ctx.putImageData(imgData, 0, 0);
