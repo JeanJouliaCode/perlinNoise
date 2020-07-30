@@ -12,6 +12,8 @@ var Screen = class {
             this.imgData = this.ctx.createImageData(this.c.width, this.c.height);
 
             this.ctx.putImageData(this.imgData, 0, 0);
+
+            this.oldDate = 0;
       }
 
 
@@ -49,8 +51,20 @@ var Screen = class {
             }
       }
 
-      refresh() {
-            this.ctx.putImageData(this.imgData, 0, 0);
+      refresh(repeat = false) {
+            if (repeat) {
+                  var time = new Date();
+                  var timeNumber = time.getTime();
+                  console.log((timeNumber - this.oldDate));
+                  if ((timeNumber - this.oldDate) > 30) {
+                        this.ctx.putImageData(this.imgData, 0, 0);
+                        this.oldDate = timeNumber;
+                  }
+            }
+            else {
+                  this.ctx.putImageData(this.imgData, 0, 0);
+            }
+
       }
 
 }
