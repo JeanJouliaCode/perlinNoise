@@ -1,45 +1,41 @@
 function startGame() {
-      var c = document.getElementById("myCanvas");
-      var pad = document.getElementById("clickSurface");
+      var pad = document.getElementById("myCanvas");
 
       var clicked = false;
 
-      c.width = document.body.clientWidth - 2;
-      c.height = document.body.clientHeight - 7;
+      var screen = new Screen("myCanvas");
 
-      var ctx = c.getContext("2d");
-      var imgData = ctx.createImageData(c.width, c.height);
-
-      var i;
-      for (i = 0; i < imgData.data.length; i += 4) {
-            imgData.data[i + 0] = Math.floor(Math.random() * 255);
-            imgData.data[i + 1] = Math.floor(Math.random() * 255);
-            imgData.data[i + 2] = Math.floor(Math.random() * 255);
-            imgData.data[i + 3] = 255;
+      for (var i = 0; i < screen.imgData.data.length; i += 4) {
+            screen.imgData.data[i + 0] = Math.floor(Math.random() * 255);
+            screen.imgData.data[i + 1] = Math.floor(Math.random() * 255);
+            screen.imgData.data[i + 2] = Math.floor(Math.random() * 255);
+            screen.imgData.data[i + 3] = 255;
       }
+
+      screen.refresh();
 
 
       var squareSize = 100;
 
-
-      ctx.putImageData(imgData, 0, 0);
-
       pad.addEventListener('mousemove', (event) => {
             if (clicked) {
-                  var y = event.clientX - squareSize / 2;
-                  var x = event.clientY - squareSize / 2;
+                  var ySquare = event.clientX - squareSize / 2;
+                  var xSquare = event.clientY - squareSize / 2;
 
-                  for (i = 0; i < squareSize; i++) {
-                        for (j = 0; j < squareSize * 4; j += 4) {
-                              imgData.data[(i + x) * c.width * 4 + j + y * 4] = Math.floor(Math.random() * 255);
-                              imgData.data[(i + x) * c.width * 4 + j + y * 4 + 1] = Math.floor(Math.random() * 255);
-                              imgData.data[(i + x) * c.width * 4 + j + y * 4 + 2] = 1;
+                  for (var x = 0; x < squareSize; x++) {
+                        for (var y = 0; y < squareSize; y++) {
+                              var r = Math.floor(Math.random() * 255);
+                              var g = Math.floor(Math.random() * 255);
+                              var b = Math.floor(Math.random() * 255);
+                              screen.putPixel(xSquare + x, ySquare + y, r, g, b);
                         }
                   }
-                  ctx.putImageData(imgData, 0, 0);
+
+                  screen.refresh();
             }
 
       });
+
 
       pad.addEventListener('mousedown', (event) => {
             console.log('click');
